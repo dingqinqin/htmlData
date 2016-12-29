@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	
+	<style>
+	*{margin:0;padding:0}
+	@font-face {
+	  font-family: 'iconfont';  /* project id 209693 */
+	  src: url('//at.alicdn.com/t/font_7khtt3v1hn2ep14i.eot');
+	  src: url('//at.alicdn.com/t/font_7khtt3v1hn2ep14i.eot?#iefix') format('embedded-opentype'),
+	  url('//at.alicdn.com/t/font_7khtt3v1hn2ep14i.woff') format('woff'),
+	  url('//at.alicdn.com/t/font_7khtt3v1hn2ep14i.ttf') format('truetype'),
+	  url('//at.alicdn.com/t/font_7khtt3v1hn2ep14i.svg#iconfont') format('svg');
+	}
+	.iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;}
+    .font{
+    	font-size:35px;
+    	color:#fff;
+    }
+   
+	html,body{
+		height:100%;
+		width:100%;
+	}
+	body{
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+	}
+		.header{
+			width:100%;
+			height:100px;
+			background: orange;
+			
+		}
+		.header h1{
+			font-size: 30px;
+			color:#fff;
+			width:100px;
+			height:100px;
+			margin:0 auto;
+			font-weight: 900;
+			line-height: 100px;
+		}
+		.section{
+			width:100%;
+			-webkit-box-flex: 1;
+			overflow: auto;
+		}
+		.mLlist{
+		width:100%;
+		height:100%;
+
+		}
+		.mLlist li{
+			height:100px;
+			line-height: 100px;
+			font-size: 20px;
+			text-indent:40px;
+			border-bottom: 1px solid #ccc;
+			
+		}
+		.bo{
+			width:100%;
+			height:50px;
+			background:#999999;
+		}
+		.footer{
+			width:100%;
+			height:100px;
+			background:#FFA500;
+		}
+		.footer h1{
+			font-size: 30px;
+			color:#fff;
+			width:400px;
+			height:100px;
+			margin:0 auto;
+			font-weight: 900;
+			line-height: 100px;
+		}
+		.active{
+			background:#0ff;
+			cursor: pointer;
+		}
+		.content{
+			width:600px;
+			height:50px;
+			margin:0 auto;
+
+		}
+		 .sh{
+		 	line-height: 50px;
+    		float:left;
+    		cursor: pointer;
+   		 }
+		.boo1{
+			line-height: 50px;
+			display: none;
+			float:left;
+			margin-left:245px;
+			cursor: pointer;
+		}
+		.boo2{
+			line-height: 50px;
+			display: block;
+			float:left;
+			margin-left:245px;
+			cursor: pointer;
+		}
+		.xia{
+			line-height: 50px;
+			margin-right:20px;
+			float:right;
+			cursor: pointer;
+		}
+	</style>
+	<!---->
+	
+	<body>
+		<header class="header">
+			<h1>音乐盒</h1>
+		</header>
+		<section class="section">
+			<ul class="mLlist">
+				<li class="active">爱囚</li>
+				<li>爱与希望</li>
+				<li>宠爱</li>
+				<li>海绵宝宝</li>
+				<li>美人鱼</li>
+				<li>小幸运</li>
+				<li>missdong</li>
+			</ul>
+		</section>
+		<section class="bo">
+			<div class="content">
+				<i class="iconfont font sh ">&#xe6a7;</i>
+				<span class="iconfont font boo1">&#xe609;</span>
+				<span class="iconfont font boo2">&#xe602;</span>
+				<em class="iconfont font xia">&#xe646;</em>
+			</div>
+		</section>
+		<footer class="footer">
+			<h1 id="hh1">正在播放</h1>
+		</footer>
+		<audio id="ado"></audio>
+		
+	</body>
+	<script>
+		window.onload=function(){
+			var ado=document.getElementById("ado");
+			var lis=document.getElementsByTagName("li");
+			var hh1=document.getElementById("hh1");
+			var sh=document.getElementsByClassName("sh")[0];
+			var boo1=document.getElementsByClassName("boo1")[0];
+			var boo2=document.getElementsByClassName("boo2")[0];
+			var xia =document.getElementsByClassName("xia")[0];
+			var active1=document.getElementsByClassName("active")[0];
+			var index=0;
+			var arr=["audio/爱囚.MP3","audio/爱与希望.mp4","audio/宠爱.mp3","audio/海绵宝宝.mp3","audio/美人鱼.mp4","audio/小幸运.mp3","audio/missdong.mp3"];
+			for(var i=0;i<lis.length;i++){
+				lis[i].onclick=function(){
+					
+					for(var i=0;i<lis.length;i++){
+						
+						if(lis[i]==this){
+							index=i;
+							lis[i].className="active";
+							ado.src=arr[i];
+							ado.play();
+							boo1.style.display="block";
+							boo2.style.display="none";
+							
+							hh1.innerHTML=this.innerHTML;
+						}else{
+							lis[i].className="";
+						}
+					}
+				}
+			}
+		function show(){
+				if(index==-1){
+					index=6;
+				}else if(index==7){
+					index=1;
+				}
+				lis[index].className='active';
+				ado.src=arr[index];
+				ado.play();
+			}
+			sh.onclick=function(){
+				lis[index].className="";
+				index--;
+				show();
+				boo1.style.display="block";
+				boo2.style.display="none";
+				hh1.innerHTML=lis[index].innerHTML;
+			}
+		
+			boo2.onclick=function(){
+				boo1.style.display="block";
+				boo2.style.display="none";
+				lis[index].className='active';
+				ado.src=arr[index];
+				ado.play();
+				hh1.innerHTML=lis[index].innerHTML;
+			}
+			boo1.onclick=function(){
+				lis[index].className='active';
+				ado.src=arr[index];
+				ado.pause();
+				boo2.style.display="block";
+				boo1.style.display="none";
+			}
+			xia.onclick=function(){
+				lis[index].className="";
+				index++;
+				show();
+				boo2.style.display="none";
+				boo1.style.display="block";
+				hh1.innerHTML=lis[index].innerHTML;
+			}
+		
+		}
+		
+	</script>
+</html>

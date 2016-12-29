@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+	</head>
+	<body>
+		<!--autoplay自动播放-->
+		<!--src音频路径-->
+		<!--controls-->
+		<!--loop循环播放-->
+		<!--poster播放视频前的图片-->
+		<!--proload预加载-->
+		<!--proload与autoplay互斥 -->
+		<!--muted静音在标签内设置bealoon值是不起作用的，在js中是可以的-->
+		<!--获取视频总时长durition需要在js事件中使用，获取的是秒-->
+		<!--获取视频当前时长currentTime 快进使用-->
+		<!--获取视频播放状态paused返回布尔值，true是暂停，false是播放-->
+		<!--获取当前音量volume取值范围0——1 与range滑块-->
+		<!--播放方法play()-->
+		<!--暂停方法pause()-->
+		<!--无论播放到什么地方都重头播放load()与play()合用-->
+		<!--全屏操作需要给video给个父级div.webkitRequestFullScreen,取消全屏vid.webkitCancelFullScreen是本身不是div-->
+		<!--音视频播完之后执行的事件onended-->
+		<button class="btn">获取</button>
+		<button class="btn">播放</button>
+		<button class="btn">暂停</button>
+		<button class="btn">100%</button>
+		<button class="btn">75%</button>
+		<button class="btn">50%</button>
+		<button class="btn">快进</button>
+		<button class="btn">快退</button>
+		<button class="btn">从头开始</button>
+		<button class="btn">静音/恢复</button>
+		<button class="btn">切换视频</button>
+		<video  id="vid">
+		<source src="video/picture.mp4"></source>
+		<source src="video/picture.avi"></source>
+	</video>
+		<video src="video/EP07.mp4" controls="controls" id="vid1" style="display:none"></video>
+		<div id="show" style="width:500px; height:100px"></div>
+		
+	</body>
+	<script>
+		window.onload=function(){
+			var btn=document.getElementsByClassName("btn");
+			var vid=document.getElementById("vid");
+			var vid1=document.getElementById("vid1");
+			var show=document.getElementById("show");
+			var	Vw=document.body.clientWidth;
+			var Vh=document.body.clientHeight;
+			var a;
+			btn[0].onclick=function(){
+				var aa=vid.paused;
+					var bb='播放中';
+					if (aa) {
+						bb='暂停中。。';
+					}else{
+						bb='播放中';
+					};
+				show.innerHTML="视频总时长:"+vid.duration+"s,视频当前时长:"+vid.currentTime+"s,此时播放状态:"+bb;
+				
+			},
+			btn[1].onclick=function(){
+				vid.play();
+			}
+			btn[2].onclick=function(){
+			
+				vid.pause();
+			}
+			btn[3].onclick=function(){
+				vid.width=Vw;
+				vid.height=Vh;
+			}
+			btn[4].onclick=function(){
+				vid.width=Vw*0.75;
+				vid.height=Vh*0.75;
+			}
+			btn[5].onclick=function(){
+				vid.width=Vw*0.5;
+				vid.height=Vh*0.5;
+			}
+			btn[6].onclick=function(){
+				vid.currentTime+=10;
+			}
+			btn[7].onclick=function(){
+				vid.currentTime-=10;
+			}
+			btn[8].onclick=function(){
+				vid.currentTime=0;
+				vid.play();
+			
+			}
+			btn[9].onclick=function(){
+				if (a==0) {
+					vid.muted=true;
+					a=1;
+					
+				}else{
+					vid.muted=false;
+					a=0;
+				}
+				
+			}
+			btn[10].onclick=function(){
+				if(a==0){
+					vid.src='video/EP07.mp4';
+				}else{
+					vid.src='video/picture.mp4';
+				}
+			}
+		}
+	</script>
+</html>
